@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="pt-PT"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<!-- =====================================================================
+     PREENCHER ANTES DE PUBLICAR
+     WhatsApp da Juliana: indicativo + número, sem + nem espaços.
+     Exemplo: 351912345678
+     Enquanto ficar "351XXXXXXXXX", o WhatsApp abre e pede para escolher o contacto.
+     ===================================================================== -->
+<script>const WHATSAPP = "351XXXXXXXXX";</script>
+
+<title>Resposta à proposta Mind4Time</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Bricolage+Grotesque:opsz,wght@12..96,500..700&amp;display=swap">
+
+<style>
+/* Layout: uma coluna estreita (máx. 40rem), perguntas separadas por linhas finas,
+   a linha do tempo é o único bloco destacado, barra de progresso fixa em baixo. */
+:root {
+  --bg: #F3F5F4;
+  --surface: #FFFFFF;
+  --ink: #15201C;
+  --muted: #55615D;
+  --line: #D7DFDB;
+  --accent: #0C6A5A;
+  --on-accent: #FFFFFF;
+  --accent-soft: #E1EEEA;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1412; --surface: #161F1C; --ink: #E6ECE9; --muted: #9DAAA5;
+    --line: #2B3733; --accent: #5DC7B0; --on-accent: #06231D; --accent-soft: #163029;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1412; --surface: #161F1C; --ink: #E6ECE9; --muted: #9DAAA5;
+  --line: #2B3733; --accent: #5DC7B0; --on-accent: #06231D; --accent-soft: #163029;
+  color-scheme: dark;
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.55 var(--body);
+  -webkit-text-size-adjust: 100%;
+}
+* { box-sizing: border-box; }
+
+.page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 150px;
+}
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Cabeçalho */
+.eyebrow {
+  margin: 0;
+  font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent);
+}
+h1 {
+  margin: 12px 0 12px;
+  font-family: var(--display); font-weight: 650;
+  font-size: clamp(2rem, 8vw, 2.75rem); line-height: 1.06; letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lede { margin: 0; font-size: 1.125rem; color: var(--muted); max-width: 32ch; }
+
+.toc { margin-top: 28px; border-top: 1px solid var(--line); }
+.toc a {
+  display: grid; grid-template-columns: 2rem 1fr auto; align-items: baseline; gap: 8px;
+  min-height: 52px; padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink); text-decoration: none; font-weight: 700;
+}
+.toc .letter { font-family: var(--display); color: var(--accent); font-size: 1.125rem; }
+.toc .range { color: var(--muted); font-weight: 400; font-size: .9375rem; font-variant-numeric: tabular-nums; }
+
+/* Grupos */
+.group { margin-top: 64px; scroll-margin-top: 16px; }
+.group-head {
+  display: flex; align-items: baseline; gap: 12px;
+  padding-bottom: 14px; border-bottom: 2px solid var(--ink);
+}
+.group-letter { font-family: var(--display); font-weight: 700; font-size: 2.25rem; line-height: 1; color: var(--accent); }
+.group-title { margin: 0; font-family: var(--display); font-weight: 650; font-size: 1.5rem; line-height: 1.15; text-wrap: balance; }
+.group-range { margin-left: auto; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Perguntas */
+.q { display: grid; gap: 14px; padding-block: 30px; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+.q-head { display: flex; align-items: center; gap: 10px; }
+.q-num {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--line); color: var(--muted);
+  font-weight: 700; font-size: .9375rem; font-variant-numeric: tabular-nums;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.q.is-done .q-num { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.q-topic { font-size: .8125rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.q-text { margin: 0; font-size: 1.1875rem; line-height: 1.4; font-weight: 700; text-wrap: pretty; }
+
+.q-note { margin: 0; }
+.q-ctx { list-style: none; margin: 0; padding: 14px 16px; display: grid; gap: 8px; background: var(--accent-soft); border-radius: var(--radius); }
+.q-ctx li { position: relative; padding-left: 16px; }
+.q-ctx li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
+/* Proposta recolhida */
+.prop { border-radius: var(--radius); background: var(--accent-soft); }
+.prop summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  min-height: 50px; padding: 12px 16px;
+  color: var(--accent); font-weight: 700;
+  border-radius: var(--radius);
+}
+.prop summary::-webkit-details-marker { display: none; }
+.chev {
+  flex: none; width: 9px; height: 9px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transition: transform .2s;
+}
+.prop[open] .chev { transform: rotate(45deg); }
+.prop-body { display: grid; gap: 14px; padding: 2px 16px 18px; }
+.prop-body p { margin: 0; }
+.prop-label { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px !important; }
+.prop-body a { color: var(--accent); font-weight: 700; }
+
+/* Botões de resposta */
+.choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.choice {
+  min-height: 54px; padding: 8px 6px;
+  border: 1.5px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  font: 700 1rem/1.2 var(--body);
+  cursor: pointer; touch-action: manipulation;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.choice:hover { border-color: var(--accent); }
+.choice[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.choice.solo { justify-self: start; padding-inline: 24px; }
+.choice.solo[aria-pressed="true"]::before { content: "✓ "; }
+
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 2px;
+}
+
+.field { display: grid; gap: 6px; }
+.field label { font-size: .875rem; font-weight: 700; color: var(--muted); }
+textarea {
+  width: 100%; min-height: 84px; resize: vertical;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  font: 400 1.0625rem/1.45 var(--body);
+}
+textarea.short { min-height: 60px; }
+textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+
+/* Linha do tempo */
+.timeline {
+  margin-top: 28px; padding: 22px 18px 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  scroll-margin-top: 16px;
+}
+.timeline h3 { margin: 0 0 4px; font-family: var(--display); font-weight: 650; font-size: 1.25rem; }
+.timeline .sub { margin: 0 0 20px; color: var(--muted); font-size: .9375rem; }
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl-step { position: relative; padding: 0 0 24px 32px; }
+.tl-step::before {
+  content: ""; position: absolute; left: 7px; top: 22px; bottom: 2px;
+  width: 2px; background: var(--line);
+}
+.tl-step:last-child::before { display: none; }
+.tl-dot {
+  position: absolute; left: 0; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 3px solid var(--accent); background: var(--surface);
+}
+.tl-step.decision .tl-dot { background: var(--accent); }
+.tl-when { margin: 0 0 4px; font-family: var(--display); font-weight: 650; font-size: 1.0625rem; line-height: 1.3; }
+.tl-intro { margin: 0 0 10px; color: var(--muted); font-size: .96875rem; }
+.tl-doc-title { margin: 0 0 8px; font-size: .96875rem; }
+.tl-docs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tl-docs li { font-size: .96875rem; line-height: 1.5; padding-left: 14px; position: relative; }
+.tl-docs li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--muted);
+}
+.tl-step p:last-child { margin-bottom: 0; }
+.tl-sub { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.tl-docs .tl-sub li::before { background: transparent; border: 1.5px solid var(--muted); }
+
+/* Enviar */
+.send { margin-top: 64px; display: grid; gap: 16px; scroll-margin-top: 16px; }
+.send h2 { margin: 0; font-family: var(--display); font-weight: 650; font-size: 1.5rem; }
+.send .sub { margin: -8px 0 0; color: var(--muted); }
+.btn-send {
+  width: 100%; min-height: 64px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  border: 0; border-radius: 16px;
+  background: var(--accent); color: var(--on-accent);
+  font: 700 1.1875rem/1.2 var(--body);
+  cursor: pointer; touch-action: manipulation;
+}
+.btn-send svg { width: 22px; height: 22px; }
+.hint { margin: 0; color: var(--muted); }
+.hint:empty { display: none; }
+
+.preview { display: grid; gap: 12px; }
+.preview-label { margin: 0; font-size: .8125rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.bubble {
+  margin: 0; padding: 14px 16px;
+  background: var(--accent-soft); color: var(--ink);
+  border-radius: 18px 18px 4px 18px;
+  font: 400 1rem/1.5 var(--body);
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  max-height: 55vh; overflow: auto;
+}
+.preview-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn {
+  min-height: 54px; padding: 8px 12px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  border-radius: var(--radius);
+  font: 700 1rem/1.2 var(--body); text-decoration: none; cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); border: 1.5px solid var(--accent); }
+.btn-secondary { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); }
+.note { margin: 0; color: var(--muted); font-size: .9375rem; }
+.note strong { color: var(--ink); user-select: all; font-variant-numeric: tabular-nums; }
+.status { min-height: 1.4em; margin: 0; font-weight: 700; color: var(--accent); }
+
+.reset {
+  justify-self: start; margin-top: 12px;
+  background: none; border: 0; padding: 10px 0;
+  color: var(--muted); font: 400 .9375rem var(--body);
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.reset.armed { color: var(--ink); font-weight: 700; }
+
+/* Barra de progresso */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bar-fill { position: absolute; left: 0; top: -1px; height: 3px; width: 0; background: var(--accent); transition: width .3s; }
+.bar-inner { max-width: 40rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.bar-count { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bar-count span { color: var(--muted); font-weight: 400; }
+.bar-go {
+  min-height: 42px; padding: 0 16px;
+  display: inline-flex; align-items: center;
+  border: 1.5px solid var(--accent); border-radius: 999px;
+  color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<main class="page">
+  <header>
+    <p class="eyebrow">Juliana Fernandes · Mind4Time</p>
+    <h1>Gonçalo, obrigada pela proposta.</h1>
+    <p class="lede">Ficam algumas dúvidas. Podes responder diretamente abaixo e, ao carregares em Enviar, todas as respostas são compiladas automaticamente para me enviares.</p>
+
+    <nav class="toc" aria-label="Grupos">
+      <a href="#grupo-a"><span class="letter">A</span><span>Pacote salarial</span><span class="range">1–7</span></a>
+      <a href="#grupo-b"><span class="letter">B</span><span>Progressão de sócio</span><span class="range">8–10</span></a>
+      <a href="#grupo-c"><span class="letter">C</span><span>Curiosidade</span><span class="range">11–13</span></a>
+    </nav>
+  </header>
+
+  <section class="group" id="grupo-a" aria-labelledby="titulo-a">
+    <div class="group-head">
+      <span class="group-letter" aria-hidden="true">A</span>
+      <h2 class="group-title" id="titulo-a">Pacote salarial</h2>
+      <span class="group-range">1–7</span>
+    </div>
+    <div class="q-list" data-group="A"><article class="q" id="p1"><div class="q-head"><span class="q-num" aria-hidden="true">1</span><span class="q-topic">Função</span></div><h3 class="q-text" id="p1-q"><span class="sr">Ponto 1. </span>Qual será a minha função e a progressão?</h3><details class="prop" id="p1-prop"><summary><span class="chev" aria-hidden="true"></span>Ver a minha proposta e justificação</summary><div class="prop-body"><div><p class="prop-label">Proposta</p><p>Junior Partner agora e Partner ao fim dos 3 anos.</p></div><div><p class="prop-label">Porquê</p><p>Para crescermos, convém uma estrutura visível e uma progressão clara. A visibilidade para o exterior podemos discutir.</p></div></div></details><div class="choices" role="group" aria-labelledby="p1-q"><button type="button" class="choice" id="p1-concordo" data-n="1" data-v="concordo" aria-pressed="false">Concordo</button><button type="button" class="choice" id="p1-avaliar" data-n="1" data-v="avaliar" aria-pressed="false">A avaliar</button><button type="button" class="choice" id="p1-outro-btn" data-n="1" data-v="outro" aria-pressed="false" aria-controls="p1-outro-wrap">Outro</button></div><div class="field" id="p1-outro-wrap" hidden=""><label for="p1-outro">A tua resposta</label><textarea class="short" id="p1-outro" data-n="1" data-f="outro" rows="2"></textarea></div></article><article class="q" id="p2"><div class="q-head"><span class="q-num" aria-hidden="true">2</span><span class="q-topic">Carro</span></div><h3 class="q-text" id="p2-q"><span class="sr">Ponto 2. </span>Que valor ou intervalo tens em mente para o carro, e posso escolher o modelo (incluindo híbrido ou elétrico)?</h3><div class="field"><label for="p2-texto">A tua resposta</label><textarea id="p2-texto" data-n="2" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p2-avaliar" data-n="2" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p3"><div class="q-head"><span class="q-num" aria-hidden="true">3</span><span class="q-topic">Custos do carro</span></div><h3 class="q-text" id="p3-q"><span class="sr">Ponto 3. </span>A empresa cobre o seguro contra todos os riscos, a inspeção, as revisões e os impostos do carro? Qual é o plafond?</h3><div class="field"><label for="p3-texto">A tua resposta</label><textarea id="p3-texto" data-n="3" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p3-avaliar" data-n="3" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p4"><div class="q-head"><span class="q-num" aria-hidden="true">4</span><span class="q-topic">Subsídio de alimentação</span></div><h3 class="q-text" id="p4-q"><span class="sr">Ponto 4. </span>Qual é o subsídio de alimentação (valor e formato)?</h3><div class="field"><label for="p4-texto">A tua resposta</label><textarea id="p4-texto" data-n="4" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p4-avaliar" data-n="4" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p5"><div class="q-head"><span class="q-num" aria-hidden="true">5</span><span class="q-topic">Prémio</span></div><h3 class="q-text" id="p5-q"><span class="sr">Ponto 5. </span>O prémio é pago anualmente ou quadrimestralmente? Como Junior Partner, estou bem com um prémio anual, se for assim para os partners.</h3><div class="field"><label for="p5-texto">A tua resposta</label><textarea id="p5-texto" data-n="5" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p5-avaliar" data-n="5" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p6"><div class="q-head"><span class="q-num" aria-hidden="true">6</span><span class="q-topic">Férias</span></div><h3 class="q-text" id="p6-q"><span class="sr">Ponto 6. </span>Quantos dias de férias tenho, e quais são os dias fixos da empresa? Por norma, tiro férias todos os anos em fevereiro e outubro, e gostava de manter isso, além dos dias fixos.</h3><div class="field"><label for="p6-texto">A tua resposta</label><textarea id="p6-texto" data-n="6" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p6-avaliar" data-n="6" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p7"><div class="q-head"><span class="q-num" aria-hidden="true">7</span><span class="q-topic">Modelo de trabalho</span></div><h3 class="q-text" id="p7-q"><span class="sr">Ponto 7. </span>Confirmas este modelo de trabalho e esta flexibilidade de horário?</h3><p class="q-note">Vou trabalhar sempre o que for preciso, sem olhar a horários, porque estou a contribuir para algo que também é meu. Por isso peço flexibilidade de horário, sem nunca deixar de fazer todo o trabalho necessário.</p><ul class="q-ctx"><li>Escritório de segunda a quinta e sexta de manhã em casa.</li><li>Terça à tarde a trabalhar de casa. Quando estiver em cliente, faço o horário normal.</li><li>Flexibilidade de horário, por exemplo entrar às 8h e sair às 17h.</li></ul><div class="choices" role="group" aria-labelledby="p7-q"><button type="button" class="choice" id="p7-concordo" data-n="7" data-v="concordo" aria-pressed="false">Concordo</button><button type="button" class="choice" id="p7-avaliar" data-n="7" data-v="avaliar" aria-pressed="false">A avaliar</button><button type="button" class="choice" id="p7-outro-btn" data-n="7" data-v="outro" aria-pressed="false" aria-controls="p7-outro-wrap">Outro</button></div><div class="field" id="p7-outro-wrap" hidden=""><label for="p7-outro">A tua resposta</label><textarea class="short" id="p7-outro" data-n="7" data-f="outro" rows="2"></textarea></div></article></div>
+  </section>
+
+  <section class="group" id="grupo-b" aria-labelledby="titulo-b">
+    <div class="group-head">
+      <span class="group-letter" aria-hidden="true">B</span>
+      <h2 class="group-title" id="titulo-b">Progressão de sócio</h2>
+      <span class="group-range">8–10</span>
+    </div>
+
+    <section class="timeline" id="linha" aria-labelledby="linha-titulo">
+      <h3 id="linha-titulo">O que se assina e quando</h3>
+      <p class="sub">Momento zero → Mês 3: decisão</p>
+      <ol class="tl">
+        <li class="tl-step">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <p class="tl-when">Momento zero</p>
+          <p class="tl-intro">Assinamos logo os dois documentos:</p>
+          <ul class="tl-docs">
+            <li><strong>Contrato de trabalho</strong>, com carro a partir do fim dos 3 meses.</li>
+            <li><strong>Acordo de sócios</strong>, que só entra em vigor ao fim de 3 meses, se ambos quisermos continuar. Inclui:
+              <ul class="tl-sub">
+                <li>6% (2% por ano)</li>
+                <li>os indicadores, com a forma de medição e os objetivos</li>
+                <li>cláusula de não concorrência</li>
+                <li>good leaver e bad leaver</li>
+                <li>função: de Junior Partner a Partner</li>
+                <li>o que acontece se não avançarmos: aviso prévio de 15 dias ou outras condições</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="tl-step decision">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <p class="tl-when">Mês 3: decisão</p>
+          <p class="tl-intro">Se ambos quisermos continuar, o acordo de sócios entra em vigor e passo a ter carro.</p>
+        </li>
+      </ol>
+    </section>
+
+    <div class="q-list" data-group="B"><article class="q" id="p8"><div class="q-head"><span class="q-num" aria-hidden="true">8</span><span class="q-topic">Sequência de assinaturas</span></div><h3 class="q-text" id="p8-q"><span class="sr">Ponto 8. </span>Faz sentido esta sequência de assinaturas?</h3><details class="prop" id="p8-prop"><summary><span class="chev" aria-hidden="true"></span>Ver a minha proposta e justificação</summary><div class="prop-body"><div><p class="prop-label">Proposta</p><p>Os marcos da linha do tempo acima. <a href="#linha">Ver a linha do tempo ↑</a></p></div><div><p class="prop-label">Porquê</p><p>O período experimental é para os dois; quero ter por escrito, desde o início, o que acontece se avançarmos e se não avançarmos.</p></div></div></details><div class="choices" role="group" aria-labelledby="p8-q"><button type="button" class="choice" id="p8-concordo" data-n="8" data-v="concordo" aria-pressed="false">Concordo</button><button type="button" class="choice" id="p8-avaliar" data-n="8" data-v="avaliar" aria-pressed="false">A avaliar</button><button type="button" class="choice" id="p8-outro-btn" data-n="8" data-v="outro" aria-pressed="false" aria-controls="p8-outro-wrap">Outro</button></div><div class="field" id="p8-outro-wrap" hidden=""><label for="p8-outro">A tua resposta</label><textarea class="short" id="p8-outro" data-n="8" data-f="outro" rows="2"></textarea></div></article><article class="q" id="p9"><div class="q-head"><span class="q-num" aria-hidden="true">9</span><span class="q-topic">Atribuição dos 2%</span></div><h3 class="q-text" id="p9-q"><span class="sr">Ponto 9. </span>Quando é atribuído cada 2%, e a partir de quando é meu? Pago alguma coisa por ele?</h3><div class="field"><label for="p9-texto">A tua resposta</label><textarea id="p9-texto" data-n="9" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p9-avaliar" data-n="9" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p10"><div class="q-head"><span class="q-num" aria-hidden="true">10</span><span class="q-topic">Managing partner</span></div><h3 class="q-text" id="p10-q"><span class="sr">Ponto 10. </span>Depois dos 6%, o meu objetivo é vir a ser managing partner, quando quiseres deixar de o ser. Quando definimos as regras para isso: por votos, por nomeação tua, ou de outra forma?</h3><div class="field"><label for="p10-texto">A tua resposta</label><textarea id="p10-texto" data-n="10" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p10-avaliar" data-n="10" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article></div>
+  </section>
+
+  <section class="group" id="grupo-c" aria-labelledby="titulo-c">
+    <div class="group-head">
+      <span class="group-letter" aria-hidden="true">C</span>
+      <h2 class="group-title" id="titulo-c">Curiosidade</h2>
+      <span class="group-range">11–13</span>
+    </div>
+    <div class="q-list" data-group="C"><article class="q" id="p11"><div class="q-head"><span class="q-num" aria-hidden="true">11</span><span class="q-topic">Conta Claude</span></div><h3 class="q-text" id="p11-q"><span class="sr">Ponto 11. </span>A Mind4Time paga-me uma conta executiva do Claude?</h3><div class="field"><label for="p11-texto">A tua resposta</label><textarea id="p11-texto" data-n="11" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p11-avaliar" data-n="11" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p12"><div class="q-head"><span class="q-num" aria-hidden="true">12</span><span class="q-topic">Formação</span></div><h3 class="q-text" id="p12-q"><span class="sr">Ponto 12. </span>Concordas que, de vez em quando, temos de ir buscar conhecimento fora para não ficarmos para trás? Há orçamento e horas protegidas para formação externa ou executiva?</h3><div class="field"><label for="p12-texto">A tua resposta</label><textarea id="p12-texto" data-n="12" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p12-avaliar" data-n="12" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article><article class="q" id="p13"><div class="q-head"><span class="q-num" aria-hidden="true">13</span><span class="q-topic">Conferências</span></div><h3 class="q-text" id="p13-q"><span class="sr">Ponto 13. </span>Há abertura para irmos a conferências, por exemplo a Unleash Paris? Para mim, conferências e formação são essenciais para continuar a inovar.</h3><div class="field"><label for="p13-texto">A tua resposta</label><textarea id="p13-texto" data-n="13" data-f="texto" rows="3" style="height: 101px;"></textarea></div><button type="button" class="choice solo" id="p13-avaliar" data-n="13" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button></article></div>
+  </section>
+
+  <section class="send" id="enviar" aria-labelledby="titulo-enviar">
+    <h2 id="titulo-enviar">Enviar</h2>
+    <p class="sub">Vês a mensagem antes de abrir o WhatsApp. Só segue quando carregares em enviar lá.</p>
+    <button type="button" class="btn-send" id="btn-enviar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10 14"></path><path d="M21 3 14.5 21l-4.5-7-7-4.5z"></path></svg>
+      Enviar por WhatsApp
+    </button>
+    <p class="hint" id="hint" aria-live="polite"></p>
+
+    <div class="preview" id="preview" hidden="">
+      <p class="preview-label">Pré-visualização</p>
+      <pre class="bubble" id="preview-text"></pre>
+      <p class="note" id="preview-count"></p>
+      <div class="preview-actions">
+        <a class="btn btn-primary" id="wa-link" href="https://wa.me/" target="_blank" rel="noopener">Abrir no WhatsApp</a>
+        <button type="button" class="btn btn-secondary" id="btn-copiar">Copiar texto</button>
+      </div>
+      <p class="status" id="copy-status" aria-live="polite"></p>
+      <p class="note" id="numero-info" hidden="">Se o WhatsApp não abrir, copia o texto e envia para <strong id="numero"></strong>.</p>
+      <p class="note" id="numero-falta">Se o WhatsApp não abrir, copia o texto e envia-mo.</p>
+    </div>
+
+    <button type="button" class="reset" id="btn-apagar">Apagar todas as respostas</button>
+  </section>
+</main>
+
+<div class="bar" role="status" aria-live="polite">
+  <div class="bar-fill" id="bar-fill" style="width: 0%;"></div>
+  <div class="bar-inner">
+    <p class="bar-count" style="margin:0"><b id="count">0</b> <span id="total-label">de 13 respondidas</span></p>
+    <a class="bar-go" href="#enviar">Enviar ↓</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var Q = [
+    { n: 1, g: "A", k: "Função", c: true, q: "Qual será a minha função e a progressão?",
+      p: "Junior Partner agora e Partner ao fim dos 3 anos.",
+      w: "Para crescermos, convém uma estrutura visível e uma progressão clara. A visibilidade para o exterior podemos discutir." },
+    { n: 2, g: "A", k: "Carro", q: "Que valor ou intervalo tens em mente para o carro, e posso escolher o modelo (incluindo híbrido ou elétrico)?" },
+    { n: 3, g: "A", k: "Custos do carro", q: "A empresa cobre o seguro contra todos os riscos, a inspeção, as revisões e os impostos do carro? Qual é o plafond?" },
+    { n: 4, g: "A", k: "Subsídio de alimentação", q: "Qual é o subsídio de alimentação (valor e formato)?" },
+    { n: 4, g: "A", k: "Prémio", q: "O prémio é pago anualmente ou quadrimestralmente? Como Junior Partner, estou bem com um prémio anual, se for assim para os partners." },
+    { n: 5, g: "A", k: "Férias", q: "Quantos dias de férias tenho, e quais são os dias fixos da empresa? Por norma, tiro férias todos os anos em fevereiro e outubro, e gostava de manter isso, além dos dias fixos." },
+    { n: 6, g: "A", k: "Modelo de trabalho", c: true, q: "Confirmas este modelo de trabalho e esta flexibilidade de horário?",
+      note: "Vou trabalhar sempre o que for preciso, sem olhar a horários, porque estou a contribuir para algo que também é meu. Por isso peço flexibilidade de horário, sem nunca deixar de fazer todo o trabalho necessário.",
+      list: [
+        "Escritório de segunda a quinta e sexta de manhã em casa.",
+        "Terça à tarde a trabalhar de casa. Quando estiver em cliente, faço o horário normal.",
+        "Flexibilidade de horário, por exemplo entrar às 8h e sair às 17h."
+      ] },
+
+    { n: 8, g: "B", k: "Sequência de assinaturas", c: true, q: "Faz sentido esta sequência de assinaturas?",
+      p: "Os marcos da linha do tempo acima.", link: true,
+      w: "O período experimental é para os dois; quero ter por escrito, desde o início, o que acontece se avançarmos e se não avançarmos." },
+    { n: 9, g: "B", k: "Atribuição dos 2%", q: "Quando é atribuído cada 2%, e a partir de quando é meu? Pago alguma coisa por ele?" },
+    { n: 10, g: "B", k: "Managing partner", q: "Depois dos 6%, o meu objetivo é vir a ser managing partner, quando quiseres deixar de o ser. Quando definimos as regras para isso: por votos, por nomeação tua, ou de outra forma?" },
+
+    { n: 11, g: "C", k: "Conta Claude", q: "A Mind4Time paga-me uma conta executiva do Claude?" },
+    { n: 12, g: "C", k: "Formação", q: "Concordas que, de vez em quando, temos de ir buscar conhecimento fora para não ficarmos para trás? Há orçamento e horas protegidas para formação externa ou executiva?" },
+    { n: 13, g: "C", k: "Conferências", q: "Há abertura para irmos a conferências, por exemplo a Unleash Paris? Para mim, conferências e formação são essenciais para continuar a inovar." }
+  ];
+  Q.forEach(function (q, i) { q.n = i + 1; }); /* numeração contínua automática */
+  var TOTAL = Q.length;
+  var BY_N = {};
+  Q.forEach(function (q) { BY_N[q.n] = q; });
+
+  /* Número de WhatsApp */
+  var RAW = (typeof WHATSAPP === "string") ? WHATSAPP : "";
+  var NUM = RAW.replace(/\D/g, "");
+  var NUM_OK = !/x/i.test(RAW) && NUM.length >= 9;
+
+  /* Rascunho guardado só neste browser */
+  var KEY = "m4t-resposta-goncalo-v4";
+  document.getElementById("total-label").textContent = "de " + TOTAL + " respondidas";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function st(n) { if (!state[n]) state[n] = {}; return state[n]; }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* Render */
+  function render(q) {
+    var id = "p" + q.n;
+    var head =
+      '<div class="q-head"><span class="q-num" aria-hidden="true">' + q.n + '</span>' +
+      '<span class="q-topic">' + esc(q.k) + '</span></div>' +
+      '<h3 class="q-text" id="' + id + '-q"><span class="sr">Ponto ' + q.n + '. </span>' + esc(q.q) + '</h3>' +
+      (q.note ? '<p class="q-note">' + esc(q.note) + '</p>' : '') +
+      (q.list ? '<ul class="q-ctx">' + q.list.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join("") + '</ul>' : '');
+
+    if (q.c) {
+      var link = q.link ? ' <a href="#linha">Ver a linha do tempo ↑</a>' : "";
+      var block = !q.p ? "" :
+        '<details class="prop" id="' + id + '-prop"><summary><span class="chev" aria-hidden="true"></span>Ver a minha proposta e justificação</summary>' +
+          '<div class="prop-body">' +
+            '<div><p class="prop-label">Proposta</p><p>' + esc(q.p) + link + '</p></div>' +
+            '<div><p class="prop-label">Porquê</p><p>' + esc(q.w) + '</p></div>' +
+          '</div></details>';
+      return head + block +
+        '<div class="choices" role="group" aria-labelledby="' + id + '-q">' +
+          '<button type="button" class="choice" id="' + id + '-concordo" data-n="' + q.n + '" data-v="concordo" aria-pressed="false">Concordo</button>' +
+          '<button type="button" class="choice" id="' + id + '-avaliar" data-n="' + q.n + '" data-v="avaliar" aria-pressed="false">A avaliar</button>' +
+          '<button type="button" class="choice" id="' + id + '-outro-btn" data-n="' + q.n + '" data-v="outro" aria-pressed="false" aria-controls="' + id + '-outro-wrap">Outro</button>' +
+        '</div>' +
+        '<div class="field" id="' + id + '-outro-wrap" hidden>' +
+          '<label for="' + id + '-outro">A tua resposta</label>' +
+          '<textarea class="short" id="' + id + '-outro" data-n="' + q.n + '" data-f="outro" rows="2"></textarea>' +
+        '</div>';
+    }
+    return head +
+      '<div class="field"><label for="' + id + '-texto">A tua resposta</label>' +
+        '<textarea id="' + id + '-texto" data-n="' + q.n + '" data-f="texto" rows="3"></textarea></div>' +
+      '<button type="button" class="choice solo" id="' + id + '-avaliar" data-n="' + q.n + '" data-v="avaliar-toggle" aria-pressed="false">A avaliar</button>';
+  }
+
+  document.querySelectorAll(".q-list").forEach(function (list) {
+    var g = list.getAttribute("data-group");
+    if (list.children.length) return; /* já vem pré-renderizado (versão em ficheiro) */
+    list.innerHTML = Q.filter(function (q) { return q.g === g; }).map(function (q) {
+      return '<article class="q" id="p' + q.n + '">' + render(q) + '</article>';
+    }).join("");
+  });
+
+  /* Respostas */
+  function clean(s) { return String(s || "").replace(/\s*\n\s*/g, " ").trim(); }
+
+  function answerOf(q) {
+    var s = state[q.n] || {};
+    if (q.c) {
+      if (s.choice === "concordo") return "Concordo";
+      if (s.choice === "avaliar") return "A avaliar";
+      if (s.choice === "outro") { var o = clean(s.outro); return o ? "Outro: " + o : null; }
+      return null;
+    }
+    var t = clean(s.texto);
+    if (s.avaliar) return t ? "A avaliar: " + t : "A avaliar";
+    return t || null;
+  }
+
+  function buildMessage() {
+    var lines = [];
+    Q.forEach(function (q) {
+      var a = answerOf(q);
+      if (a) lines.push(q.n + ". " + q.k + ": " + a);
+    });
+    return { text: lines.length ? "Respostas do Gonçalo à proposta:\n" + lines.join("\n") : "", count: lines.length };
+  }
+
+  function autosize(t) {
+    t.style.height = "auto";
+    t.style.height = Math.max(t.scrollHeight + 3, 0) + "px";
+  }
+
+  var countEl = document.getElementById("count");
+  var fillEl = document.getElementById("bar-fill");
+  var previewEl = document.getElementById("preview");
+
+  function refresh() {
+    var done = 0;
+    Q.forEach(function (q) {
+      var ok = !!answerOf(q);
+      if (ok) done++;
+      var art = document.getElementById("p" + q.n);
+      if (art) art.classList.toggle("is-done", ok);
+    });
+    countEl.textContent = done;
+    fillEl.style.width = (done / TOTAL * 100) + "%";
+    if (!previewEl.hidden) showPreview(false);
+  }
+
+  function applyState() {
+    Q.forEach(function (q) {
+      var s = state[q.n] || {};
+      var id = "p" + q.n;
+      if (q.c) {
+        ["concordo", "avaliar"].forEach(function (v) {
+          document.getElementById(id + "-" + v).setAttribute("aria-pressed", s.choice === v ? "true" : "false");
+        });
+        document.getElementById(id + "-outro-btn").setAttribute("aria-pressed", s.choice === "outro" ? "true" : "false");
+        var wrap = document.getElementById(id + "-outro-wrap");
+        wrap.hidden = s.choice !== "outro";
+        var ta = document.getElementById(id + "-outro");
+        ta.value = s.outro || "";
+      } else {
+        document.getElementById(id + "-texto").value = s.texto || "";
+        document.getElementById(id + "-avaliar").setAttribute("aria-pressed", s.avaliar ? "true" : "false");
+      }
+    });
+    document.querySelectorAll("textarea").forEach(function (t) { if (t.offsetParent !== null) autosize(t); });
+    refresh();
+  }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest(".choice");
+    if (!b) return;
+    var n = Number(b.getAttribute("data-n"));
+    var v = b.getAttribute("data-v");
+    var s = st(n);
+    var id = "p" + n;
+
+    if (v === "avaliar-toggle") {
+      s.avaliar = !s.avaliar;
+      b.setAttribute("aria-pressed", s.avaliar ? "true" : "false");
+    } else {
+      s.choice = (s.choice === v) ? null : v;
+      ["concordo", "avaliar"].forEach(function (x) {
+        document.getElementById(id + "-" + x).setAttribute("aria-pressed", s.choice === x ? "true" : "false");
+      });
+      document.getElementById(id + "-outro-btn").setAttribute("aria-pressed", s.choice === "outro" ? "true" : "false");
+      var wrap = document.getElementById(id + "-outro-wrap");
+      wrap.hidden = s.choice !== "outro";
+      if (s.choice === "outro") {
+        var ta = document.getElementById(id + "-outro");
+        autosize(ta);
+        try { ta.focus({ preventScroll: true }); } catch (err) { ta.focus(); }
+      }
+    }
+    save();
+    refresh();
+  });
+
+  document.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t.tagName !== "TEXTAREA") return;
+    var n = Number(t.getAttribute("data-n"));
+    st(n)[t.getAttribute("data-f")] = t.value;
+    autosize(t);
+    save();
+    refresh();
+  });
+
+  /* Enviar */
+  var hintEl = document.getElementById("hint");
+  var previewText = document.getElementById("preview-text");
+  var previewCount = document.getElementById("preview-count");
+  var waLink = document.getElementById("wa-link");
+  var copyStatus = document.getElementById("copy-status");
+
+  if (NUM_OK) {
+    document.getElementById("numero").textContent = "+" + NUM;
+    document.getElementById("numero-info").hidden = false;
+  } else {
+    document.getElementById("numero-falta").hidden = false;
+  }
+
+  function showPreview(scroll) {
+    var m = buildMessage();
+    if (!m.count) {
+      previewEl.hidden = true;
+      hintEl.textContent = "Ainda não respondeste a nenhum ponto.";
+      return;
+    }
+    hintEl.textContent = "";
+    previewText.textContent = m.text;
+    previewCount.textContent = m.count === TOTAL
+      ? "Inclui os " + TOTAL + " pontos."
+      : "Inclui " + m.count + " de " + TOTAL + " pontos. Os que não respondeste ficam de fora.";
+    waLink.href = "https://wa.me/" + (NUM_OK ? NUM : "") + "?text=" + encodeURIComponent(m.text);
+    previewEl.hidden = false;
+    if (scroll) previewEl.scrollIntoView({ block: "start" });
+  }
+
+  document.getElementById("btn-enviar").addEventListener("click", function () {
+    copyStatus.textContent = "";
+    showPreview(true);
+  });
+
+  function selectPreview() {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(previewText);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  document.getElementById("btn-copiar").addEventListener("click", function () {
+    var text = buildMessage().text;
+    function ok() { copyStatus.textContent = "Texto copiado."; }
+    function fallback() {
+      var copied = false;
+      if (selectPreview()) { try { copied = document.execCommand("copy"); } catch (e) {} }
+      copyStatus.textContent = copied ? "Texto copiado." : "Seleciona o texto acima e copia.";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+  });
+
+  /* Apagar respostas (confirmação em dois toques) */
+  var resetBtn = document.getElementById("btn-apagar");
+  var resetTimer = null;
+  resetBtn.addEventListener("click", function () {
+    if (!resetBtn.classList.contains("armed")) {
+      resetBtn.classList.add("armed");
+      resetBtn.textContent = "Toca outra vez para apagar tudo";
+      resetTimer = setTimeout(function () {
+        resetBtn.classList.remove("armed");
+        resetBtn.textContent = "Apagar todas as respostas";
+      }, 4000);
+      return;
+    }
+    clearTimeout(resetTimer);
+    state = {};
+    save();
+    applyState();
+    previewEl.hidden = true;
+    hintEl.textContent = "";
+    copyStatus.textContent = "";
+    resetBtn.classList.remove("armed");
+    resetBtn.textContent = "Apagar todas as respostas";
+  });
+
+  applyState();
+})();
+</script>
+
+
+
+</body></html>
